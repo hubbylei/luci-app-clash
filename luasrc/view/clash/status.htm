@@ -311,7 +311,7 @@
 				  parseIPIpip: (ip, elID) => {
 							IP.get(`https://api.ip.sb/geoip/${ip}`, 'json')
 							.then(resp => {
-								 document.getElementById(elID).innerHTML = `${resp.data.country}<br>${resp.data.isp}`
+								 document.getElementById(elID).innerHTML = `国家:${resp.data.country}<br>运营商:${resp.data.isp}`
 							})
 					},
 
@@ -320,7 +320,7 @@
 							.then((resp) => {
 								let data = resp.data.replace('当前 IP：', '').split(' 来自于：');
 								//var u= data[0].indexOf("来自于：")
-								document.getElementById('d-ip').innerHTML = `${data[0]} <br>`
+								document.getElementById('d-ip').innerHTML = `IP地址:${data[0]}<br>`
 								return `${data[0]}`
 							})
 							.then(ip => {
@@ -332,7 +332,7 @@
 					getIpifyIP: () => {
 						IP.get(`https://ipinfo.io/json?z=${random}`, 'json')
 						.then(resp => {
-						document.getElementById('ip-ipify').innerHTML = `${resp.data.ip} <br>`;
+						document.getElementById('ip-ipify').innerHTML = `IP地址:${resp.data.ip}<br>`;
 							return resp.data.ip
 						})
 						.then(ip => {
@@ -375,7 +375,7 @@
 					Ipip: (ip, elID) => {
 						IP.get(`https://api.ip.sb/geoip/${ip}`, 'json')
 							.then(resp => {
-								 document.getElementById(elID).innerHTML = `${resp.data.country}<br>${resp.data.isp}`
+								 document.getElementById(elID).innerHTML = `Country:${resp.data.country}<br>ISP:${resp.data.isp}`
 							})
 					},
 					
@@ -386,7 +386,7 @@
 							.then((resp) => {
 								let data = resp.data.replace('当前 IP：', '').split(' 来自于：');
 								//var u= data[0].indexOf("来自于：")
-								document.getElementById('d-ip').innerHTML = `${data[0]} - `
+								document.getElementById('d-ip').innerHTML = `IP:${data[0]}<br>`
 								return `${data[0]}`
 							})
 							.then(ip => {
@@ -398,7 +398,7 @@
 					getIpifyIP: () => {
 						IP.get(`https://ipinfo.io/json?z=${random}`, 'json')
 						.then(resp => {
-						document.getElementById('d-ip-g').innerHTML = `${resp.data.ip} - `;
+						document.getElementById('d-ip-g').innerHTML = `IP:${resp.data.ip}<br>`;
 							return resp.data.ip
 						})
 						.then(ip => {
