@@ -1,6 +1,6 @@
 #!/bin/sh
 
-new_clashdtun_core_version=`curl -sL "https://github.com/frainzy1477/clashdtun/tags"| grep "/frainzy1477/clashdtun/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
+new_clashdtun_core_version=`curl -sL "https://hub.fastgit.org/frainzy1477/clashdtun/tags"| grep "/frainzy1477/clashdtun/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
 sleep 2
 if [ "$?" -eq "0" ]; then
 rm -rf /usr/share/clash/new_clashdtun_core_version

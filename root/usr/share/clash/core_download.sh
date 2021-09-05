@@ -25,7 +25,7 @@ fi
 	elif [ $lang == "en" ] || [ $lang == "auto" ];then
          echo "  ${LOGTIME} - Checking latest version.." >$LOG_FILE
         fi
-new_clashdtun_core_version=`wget -qO- "https://github.com/frainzy1477/clashdtun/tags"| grep "/frainzy1477/clashdtun/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
+new_clashdtun_core_version=`wget -qO- "https://hub.fastgit.org/frainzy1477/clashdtun/tags"| grep "/frainzy1477/clashdtun/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
 
 if [ $new_clashdtun_core_version ]; then
 echo $new_clashdtun_core_version > /usr/share/clash/download_dtun_version 2>&1 & >/dev/null
@@ -47,7 +47,7 @@ fi
 	elif [ $lang == "en" ] || [ $lang == "auto" ];then
          echo "  ${LOGTIME} - Checking latest version.." >$LOG_FILE
         fi
-new_clashtun_core_version=`wget -qO- "https://github.com/frainzy1477/clashtun/tags"| grep "/frainzy1477/clashtun/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
+new_clashtun_core_version=`wget -qO- "https://hub.fastgit.org/comzyh/clash/tags"| grep "/comzyh/clash/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
 
 if [ $new_clashtun_core_version ]; then
 echo $new_clashtun_core_version > /usr/share/clash/download_tun_version 2>&1 & >/dev/null
@@ -69,7 +69,7 @@ fi
 	elif [ $lang == "en" ] || [ $lang == "auto" ];then
          echo "  ${LOGTIME} - Checking latest version.." >$LOG_FILE
         fi
-new_clashr_core_version=`wget -qO- "https://github.com/frainzy1477/clash_dev/tags"| grep "/frainzy1477/clash_dev/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
+new_clashr_core_version=`wget -qO- "https://hub.fastgit.org/Dreamacro/clash/tags"| grep "/Dreamacro/clash/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
 
 if [ $new_clashr_core_version ]; then
 echo $new_clashr_core_version > /usr/share/clash/download_core_version 2>&1 & >/dev/null
@@ -94,11 +94,11 @@ update(){
 			 echo "  ${LOGTIME} - Starting Clash Core download" >$LOG_FILE
 		fi				
 	   if [ $CORETYPE -eq 1 ];then
-		wget --no-check-certificate  https://github.com/frainzy1477/clash_dev/releases/download/"$CLASHVER"/clash-"$MODELTYPE".gz -O 2>&1 >1 /tmp/clash.gz
+		wget --no-check-certificate  https://hub.fastgit.org/Dreamacro/clash/releases/download/"$CLASHVER"/clash-"$MODELTYPE"-"$CLASHVER".gz -O 2>&1 >1 /tmp/clash.gz
 	   elif [ $CORETYPE -eq 3 ];then 
-		wget --no-check-certificate  https://github.com/frainzy1477/clashtun/releases/download/"$CLASHTUN"/clash-"$MODELTYPE".gz -O 2>&1 >1 /tmp/clash.gz
+		wget --no-check-certificate  https://hub.fastgit.org/comzyh/clash/releases/download/"$CLASHTUN"/clash-"$MODELTYPE"-"$CLASHTUN".gz -O 2>&1 >1 /tmp/clash.gz
 	   elif [ $CORETYPE -eq 4 ];then 
-		wget --no-check-certificate  https://github.com/frainzy1477/clashdtun/releases/download/"$CLASHDTUNC"/clash-"$MODELTYPE".gz -O 2>&1 >1 /tmp/clash.gz
+		wget --no-check-certificate  https://hub.fastgit.org/frainzy1477/clashdtun/releases/download/"$CLASHDTUNC"/clash-"$MODELTYPE".gz -O 2>&1 >1 /tmp/clash.gz
 	   fi
 	   
 	   if [ "$?" -eq "0" ] && [ "$(ls -l /tmp/clash.gz |awk '{print int($5)}')" -ne 0 ]; then
