@@ -25,7 +25,7 @@ fi
 	elif [ $lang == "en" ] || [ $lang == "auto" ];then
          echo "  ${LOGTIME} - Checking latest version.." >$LOG_FILE
         fi
-new_clashdtun_core_version=`wget -qO- "https://hub.fastgit.org/frainzy1477/clashdtun/tags"| grep "/frainzy1477/clashdtun/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
+new_clashdtun_core_version=`wget -qO- "https://hub.fastgit.org/hubbylei/clashdtun/tags"| grep "/hubbylei/clashdtun/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
 
 if [ $new_clashdtun_core_version ]; then
 echo $new_clashdtun_core_version > /usr/share/clash/download_dtun_version 2>&1 & >/dev/null
@@ -98,7 +98,7 @@ update(){
 	   elif [ $CORETYPE -eq 3 ];then 
 		wget --no-check-certificate  https://hub.fastgit.org/comzyh/clash/releases/download/"$CLASHTUN"/clash-"$MODELTYPE"-"$CLASHTUN".gz -O 2>&1 >1 /tmp/clash.gz
 	   elif [ $CORETYPE -eq 4 ];then 
-		wget --no-check-certificate  https://hub.fastgit.org/frainzy1477/clashdtun/releases/download/"$CLASHDTUNC"/clash-"$MODELTYPE".gz -O 2>&1 >1 /tmp/clash.gz
+		wget --no-check-certificate  https://hub.fastgit.org/hubbylei/clashdtun/releases/download/"$CLASHDTUNC"/clash-"$MODELTYPE"-"$CLASHDTUNC".gz -O 2>&1 >1 /tmp/clash.gz
 	   fi
 	   
 	   if [ "$?" -eq "0" ] && [ "$(ls -l /tmp/clash.gz |awk '{print int($5)}')" -ne 0 ]; then
@@ -143,6 +143,21 @@ update(){
 			  echo "  ${LOGTIME} - ClashTun内核更新成功！" >$LOG_FILE
 			 elif [ $lang == "en" ] || [ $lang == "auto" ];then
 			  echo "  ${LOGTIME} - ClashTun Core Update Successful" >>$LOG_FILE
+			 fi		
+			
+			elif [ $CORETYPE -eq 4 ];then
+			  rm -rf /etc/clash/dtun/clash >/dev/null 2>&1
+			  mv /tmp/clash /etc/clash/dtun/clash >/dev/null 2>&1
+			  rm -rf /usr/share/clash/dtun_version >/dev/null 2>&1
+			  mv /usr/share/clash/download_dtun_version /usr/share/clash/dtun_version >/dev/null 2>&1
+			  dtun=$(sed -n 1p /usr/share/clash/dtun_version 2>/dev/null)
+			  sed -i "s/${dtun}/v${dtun}/g" /usr/share/clash/dtun_version 2>&1
+
+			  
+			 if [ $lang == "zh_cn" ];then
+			  echo "  ${LOGTIME} - ClashDTun内核更新成功！" >$LOG_FILE
+			 elif [ $lang == "en" ] || [ $lang == "auto" ];then
+			  echo "  ${LOGTIME} - ClashDTun Core Update Successful" >>$LOG_FILE
 			 fi		
 			 
 		    fi
