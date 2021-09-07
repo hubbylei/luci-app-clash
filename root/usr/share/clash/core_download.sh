@@ -25,7 +25,7 @@ fi
 	elif [ $lang == "en" ] || [ $lang == "auto" ];then
          echo "  ${LOGTIME} - Checking latest version.." >$LOG_FILE
         fi
-new_clashdtun_core_version=`wget -qO- "https://hub.fastgit.org/hubbylei/clashdtun/tags"| grep "/hubbylei/clashdtun/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
+new_clashdtun_core_version=`wget -qO- "https://hub.fastgit.org/Dreamacro/clash/releases/tag/premium"| grep "/Dreamacro/clash/releases/tag/premium"| awk -F "/tag/" '{print $2}'| grep "Premium"| awk -F " " '{print $2}'| sed 's/<\/a>//'`
 
 if [ $new_clashdtun_core_version ]; then
 echo $new_clashdtun_core_version > /usr/share/clash/download_dtun_version 2>&1 & >/dev/null
@@ -92,13 +92,13 @@ update(){
 			 echo "  ${LOGTIME} - 开始下载 Clash 内核..." >$LOG_FILE
 		elif [ $lang == "en" ] || [ $lang == "auto" ];then
 			 echo "  ${LOGTIME} - Starting Clash Core download" >$LOG_FILE
-		fi				
+		fi
 	   if [ $CORETYPE -eq 1 ];then
 		wget --no-check-certificate  https://hub.fastgit.org/Dreamacro/clash/releases/download/"$CLASHVER"/clash-"$MODELTYPE"-"$CLASHVER".gz -O 2>&1 >1 /tmp/clash.gz
 	   elif [ $CORETYPE -eq 3 ];then 
 		wget --no-check-certificate  https://hub.fastgit.org/comzyh/clash/releases/download/"$CLASHTUN"/clash-"$MODELTYPE"-"$CLASHTUN".gz -O 2>&1 >1 /tmp/clash.gz
 	   elif [ $CORETYPE -eq 4 ];then 
-		wget --no-check-certificate  https://hub.fastgit.org/hubbylei/clashdtun/releases/download/"$CLASHDTUNC"/clash-"$MODELTYPE"-"$CLASHDTUNC".gz -O 2>&1 >1 /tmp/clash.gz
+		wget --no-check-certificate  https://hub.fastgit.org/Dreamacro/clash/releases/download/premium/clash-"$MODELTYPE"-"$CLASHDTUNC".gz -O 2>&1 >1 /tmp/clash.gz
 	   fi
 	   
 	   if [ "$?" -eq "0" ] && [ "$(ls -l /tmp/clash.gz |awk '{print int($5)}')" -ne 0 ]; then
