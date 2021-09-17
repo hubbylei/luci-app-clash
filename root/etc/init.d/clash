@@ -68,6 +68,7 @@ config_type=$(uci get clash.config.config_type 2>/dev/null)
 del_cron(){
 #=========================================================================================================================== 
 	sed -i '/clash-watchdog.sh/d' $CRON_FILE
+	sed -i '/kill_watchdog.sh/d' $CRON_FILE
 	sed -i '/update_all.sh/d' $CRON_FILE
 	sed -i '/clash.txt/d' $CRON_FILE
 	sed -i '/geoip.sh/d' $CRON_FILE
