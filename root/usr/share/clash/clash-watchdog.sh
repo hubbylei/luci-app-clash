@@ -4,6 +4,7 @@ enable=$(uci get clash.config.enable 2>/dev/null)
 CORETYPE=$(uci get clash.config.core 2>/dev/null)
 CONFIG_YAML=$(uci get clash.config.use_config 2>/dev/null)
 url=$(uci get clash.config.clash_url)
+MODELTYPE=$(uci get clash.config.download_core)
 
 update(){
 	echo '' >/tmp/clash_update.txt 2>/dev/null
@@ -125,7 +126,7 @@ if [ ${enable} -eq 1 ];then
 		if [ ! -f /etc/clash/clash ] && [ ! -f /etc/clash/clashtun/clash ] && [ ! -f /etc/clash/dtun/clash ];then
 			update
 		fi
-		/etc/init.d/clash restart 2>&1 &
+		/etc/init.d/clash restart
 	fi
 fi
 
