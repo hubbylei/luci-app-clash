@@ -3,12 +3,12 @@
 
 config_name=$(uci get clash.config.config_update_name 2>/dev/null)
 CONFIG_YAML="/usr/share/clash/config/sub/${config_name}" 
-url=$(uci get clash.config.clash_url)
+url=$(grep -F "${config_name}" "/usr/share/clashbackup/confit_list.conf" | awk -F '#' '{print $2}')
 lang=$(uci get luci.main.lang 2>/dev/null)
 REAL_LOG="/usr/share/clash/clash_real.txt"
 c_type=$(uci get clash.config.config_type 2>/dev/null)
 path=$(uci get clash.config.use_config 2>/dev/null)
-type=$(uci get clash.config)
+type=$(grep -F "${config_name}" "/usr/share/clashbackup/confit_list.conf" | awk -F '#' '{print $3}') 
 
 if [ $type == "clash" ] && [ ! -z $url ];then
 
@@ -139,4 +139,3 @@ if [ $type == "v2clash" ] && [ ! -z $url ];then
 			
 	fi
 fi
-
