@@ -6,7 +6,15 @@ CONFIG_YAML=$(uci get clash.config.use_config 2>/dev/null)
 url=$(uci get clash.config.clash_url)
 MODELTYPE=$(uci get clash.config.download_core)
 
-update(){
+if [ $CORETYPE -eq 1 ];then
+	CORE_PATH="/etc/clash/clash"
+elif [ $CORETYPE -eq 3 ];then
+	CORE_PATH="/etc/clash/clashtun/clash"
+elif [ $CORETYPE -eq 4 ];then
+	CORE_PATH="/etc/clash/dtun/clash"
+fi
+
+dcore(){
 	echo '' >/tmp/clash_update.txt 2>/dev/null
 
 	if [ -f /usr/share/clash/core_down_complete ];then 
@@ -123,8 +131,8 @@ if [ ${enable} -eq 1 ];then
 		if [ ! -f ${CONFIG_YAML} ];then
 			wget --no-check-certificate --user-agent="Clash/OpenWRT" $url -O 2>&1 >1 $CONFIG_YAML
 		fi
-		if [ ! -f /etc/clash/clash ] && [ ! -f /etc/clash/clashtun/clash ] && [ ! -f /etc/clash/dtun/clash ];then
-			update
+		if [ ! -f $CORE_PATH ];then
+			dcore
 		fi
 		/etc/init.d/clash restart
 	fi
