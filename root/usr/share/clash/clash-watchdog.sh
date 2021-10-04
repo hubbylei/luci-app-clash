@@ -128,7 +128,7 @@ dcore(){
 
 if [ ${enable} -eq 1 ];then
 	if [ ! $(pidof clash) ]; then
-		if [ ! -f ${CONFIG_YAML} ];then
+		if [ ! -f ${CONFIG_YAML} ] || [ "$(ls -l $CONFIG_YAML|awk '{print int($5)}')" -eq 0 ];then
 			wget --no-check-certificate --user-agent="Clash/OpenWRT" $url -O 2>&1 >1 $CONFIG_YAML
 		fi
 		if [ ! -f $CORE_PATH ];then
