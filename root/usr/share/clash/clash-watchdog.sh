@@ -26,7 +26,7 @@ dcore(){
 			rm -rf /usr/share/clash/download_dtun_version
 		fi
 
-		new_clashdtun_core_version=`wget -qO- "https://hub.fastgit.org/Dreamacro/clash/releases/tag/premium"| grep "/download/premium/"| head -n 1| awk -F " " '{print $2}'| awk -F "-" '{print $4}'| sed "s/.gz\"//"`
+		new_clashdtun_core_version=`wget -qO- "https://hub.fastgit.org/Dreamacro/clash/releases/tag/premium"| grep "/download/premium/"| head -n 1| awk -F " " '{print $2}'| awk -F "-" '{print $4}'| sed "s/.gz\"//g"`
 
 		if [ $new_clashdtun_core_version ]; then
 			echo $new_clashdtun_core_version > /usr/share/clash/download_dtun_version 2>&1 & >/dev/null
@@ -46,7 +46,7 @@ dcore(){
 			rm -rf /usr/share/clash/download_tun_version
 		fi
 	
-		new_clashtun_core_version=`wget -qO- "https://hub.fastgit.org/comzyh/clash/tags"| grep "/comzyh/clash/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
+		new_clashtun_core_version=`wget -qO- "https://hub.fastgit.org/comzyh/clash/tags"| grep "/comzyh/clash/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//g'`
 
 		if [ $new_clashtun_core_version ]; then
 			echo $new_clashtun_core_version > /usr/share/clash/download_tun_version 2>&1 & >/dev/null
@@ -66,7 +66,7 @@ dcore(){
 			rm -rf /usr/share/clash/download_core_version
 		fi
 
-		new_clashr_core_version=`wget -qO- "https://hub.fastgit.org/Dreamacro/clash/tags"| grep "/Dreamacro/clash/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//'`
+		new_clashr_core_version=`wget -qO- "https://hub.fastgit.org/Dreamacro/clash/tags"| grep "/Dreamacro/clash/releases/"| head -n 1| awk -F "/tag/" '{print $2}'| sed 's/\">//g'`
 
 		if [ $new_clashr_core_version ]; then
 			echo $new_clashr_core_version > /usr/share/clash/download_core_version 2>&1 & >/dev/null
