@@ -64,10 +64,10 @@ if [ -z "$${IPKG_INSTROOT}" ]; then
 	rm -rf /usr/share/clash/new_clashr_core_version 2>/dev/null
 	rm -rf /usr/share/clash/new_luci_version 2>/dev/null
 	rm -rf /usr/share/clash/web 2>/dev/null
-	mv /usr/share/clash/config/sub/config.yaml /usr/share/clashbackup/config.bak1 2>/dev/null
-	mv /usr/share/clash/config/upload/config.yaml /usr/share/clashbackup/config.bak2 2>/dev/null
-	mv /usr/share/clash/config/custom/config.yaml /usr/share/clashbackup/config.bak3 2>/dev/null
-	mv /usr/share/clash/rule.yaml /usr/share/clashbackup/rule.bak 2>/dev/null
+	mv /etc/clash/config/sub/config.yaml /etc/clash/clashbackup/config.bak1 2>/dev/null
+	mv /etc/clash/config/upload/config.yaml /etc/clash/clashbackup/config.bak2 2>/dev/null
+	mv /etc/clash/config/custom/config.yaml /etc/clash/clashbackup/config.bak3 2>/dev/null
+	mv /usr/share/clash/rule.yaml /etc/clash/clashbackup/rule.bak 2>/dev/null
 fi
 
 
@@ -80,10 +80,10 @@ define Package/$(PKG_NAME)/postinst
 if [ -z "$${IPKG_INSTROOT}" ]; then
 	rm -rf /tmp/luci*
 	mv /etc/config/clash.bak /etc/config/clash 2>/dev/null
-	mv /usr/share/clashbackup/config.bak1 /usr/share/clash/config/sub/config.yaml 2>/dev/null
-	mv /usr/share/clashbackup/config.bak2 /usr/share/clash/config/upload/config.yaml 2>/dev/null
-	mv /usr/share/clashbackup/config.bak3 /usr/share/clash/config/custom/config.yaml 2>/dev/null
-	mv /usr/share/clashbackup/rule.bak /usr/share/clash/rule.yaml 2>/dev/null
+	mv /etc/clash/clashbackup/config.bak1 /etc/clash/config/sub/config.yaml 2>/dev/null
+	mv /etc/clash/clashbackup/config.bak2 /etc/clash/config/upload/config.yaml 2>/dev/null
+	mv /etc/clash/clashbackup/config.bak3 /etc/clash/config/custom/config.yaml 2>/dev/null
+	mv /etc/clash/clashbackup/rule.bak /usr/share/clash/rule.yaml 2>/dev/null
 	/etc/init.d/clash disable 2>/dev/null
 fi
 /etc/init.d/clash disable 2>/dev/null
@@ -121,15 +121,15 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/usr/share/clash/yacd
 	$(INSTALL_DIR) $(1)/etc/clash/clashtun
 	$(INSTALL_DIR) $(1)/etc/clash/dtun
-	$(INSTALL_DIR) $(1)/usr/share/clashbackup
+	$(INSTALL_DIR) $(1)/etc/clash/clashbackup
 	$(INSTALL_DIR) $(1)/usr/share/clash/create
 	$(INSTALL_DIR) $(1)/etc/clash/provider
 	$(INSTALL_DIR) $(1)/etc/clash/proxyprovider
 	$(INSTALL_DIR) $(1)/etc/clash/ruleprovider
-	$(INSTALL_DIR) $(1)/usr/share/clash/config
-	$(INSTALL_DIR) $(1)/usr/share/clash/config/sub
-	$(INSTALL_DIR) $(1)/usr/share/clash/config/upload
-	$(INSTALL_DIR) $(1)/usr/share/clash/config/custom
+	$(INSTALL_DIR) $(1)/etc/clash/config
+	$(INSTALL_DIR) $(1)/etc/clash/config/sub
+	$(INSTALL_DIR) $(1)/etc/clash/config/upload
+	$(INSTALL_DIR) $(1)/etc/clash/config/custom
 
 	
 	$(INSTALL_BIN) 	./root/etc/init.d/clash $(1)/etc/init.d/clash
