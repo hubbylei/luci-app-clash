@@ -171,7 +171,12 @@ yml_dns_change(){
 			uci commit dhcp
 		  fi  
 	    else
-		  echo "Setting dns forwarder" >$REAL_LOG
+			if [ "${lang}" == "en" ] || [ $lang == "auto" ];then
+				echo "Setting dns forwarder" >$REAL_LOG 
+			elif [ "${lang}" == "zh_cn" ];then
+				echo "设置dns转发器" >$REAL_LOG
+			fi
+
 			  uci del_list dhcp.@dnsmasq[0].server=127.0.0.1#$dns_port >/dev/null 2>&1 	
 	          uci add_list dhcp.@dnsmasq[0].server=127.0.0.1#$dns_port >/dev/null 2>&1 
 	          uci delete dhcp.@dnsmasq[0].resolvfile
