@@ -116,9 +116,9 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_DIR) $(1)/usr/share/clash/rules
 	$(INSTALL_DIR) $(1)/usr/share/clash/rules/g_rules
 	$(INSTALL_DIR) $(1)/etc/clash/dashboard
-	$(INSTALL_DIR) $(1)/etc/clash/dashboard/img
-	$(INSTALL_DIR) $(1)/etc/clash/dashboard/js
+	$(INSTALL_DIR) $(1)/etc/clash/dashboard/assets
 	$(INSTALL_DIR) $(1)/usr/share/clash/yacd
+	$(INSTALL_DIR) $(1)/usr/share/clash/yacd/assets
 	$(INSTALL_DIR) $(1)/etc/clash/clashtun
 	$(INSTALL_DIR) $(1)/etc/clash/dtun
 	$(INSTALL_DIR) $(1)/etc/clash/clashbackup
@@ -150,12 +150,10 @@ define Package/$(PKG_NAME)/install
 	$(INSTALL_BIN) ./root/usr/share/clash/chinaipset.sh $(1)/usr/share/clash
 	$(INSTALL_BIN) ./root/usr/share/clash/china_ip.txt $(1)/usr/share/clash
 	
-	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/index.html $(1)/etc/clash/dashboard
-	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/main.658aa6a6e3feec8f168b.css $(1)/etc/clash/dashboard
-	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/img/ffac0fa1d89f15922b4594863b8b32e9.png $(1)/etc/clash/dashboard/img
-	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/js/1.bundle.658aa6a6e3feec8f168b.min.js $(1)/etc/clash/dashboard/js
-	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/js/bundle.658aa6a6e3feec8f168b.min.js $(1)/etc/clash/dashboard/js
+	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/* $(1)/etc/clash/dashboard
+	$(INSTALL_BIN) ./root/usr/share/clash/dashboard/assets/* $(1)/etc/clash/dashboard/assets
 	$(INSTALL_BIN) ./root/usr/share/clash/yacd/* $(1)/usr/share/clash/yacd
+	$(INSTALL_BIN) ./root/usr/share/clash/yacd/assets/* $(1)/usr/share/clash/yacd/assets
 	
 	$(INSTALL_DATA) ./luasrc/clash.lua $(1)/usr/lib/lua/luci
 	$(INSTALL_DATA) ./luasrc/controller/*.lua $(1)/usr/lib/lua/luci/controller
